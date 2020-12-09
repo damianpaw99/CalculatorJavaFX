@@ -31,6 +31,10 @@ public class Controller {
 
     private ObservableList<String> list = FXCollections.observableArrayList();
 
+    /**
+     * Method adding operation to expresion, base on what button was pressed
+     * @param event Event parameters
+     */
     @FXML
     void addExpresion(ActionEvent event) {
         String value = ((Button) event.getSource()).getText();
@@ -52,7 +56,10 @@ public class Controller {
         }
         textOutput.setText(expresion.toString());
     }
-
+    /**
+     * Method adding value from history list
+     * @param event Event parameters
+     */
     @FXML
     void addValue(MouseEvent event) {
         if (historyList.getSelectionModel().getSelectedItem() != null) {
@@ -62,7 +69,10 @@ public class Controller {
             textOutput.setText(expresion.toString());
         }
     }
-
+    /**
+     * Method calculating answer and updating history list
+     * @param event Event parameters
+     */
     @FXML
     void calculate(ActionEvent event) {
         String value = "";
@@ -87,19 +97,29 @@ public class Controller {
         }
     }
 
+    /**
+     * Method clearing input text field
+     * @param event Event parameters
+     */
     @FXML
     void clear(ActionEvent event) {
         expresion.setLength(0);
         textOutput.clear();
     }
-
+    /**
+     * Method clearing input text field and history list
+     * @param event Event parameters
+     */
     @FXML
     void fullClear(ActionEvent event) {
         list.clear();
         historyList.setItems(list);
         clear(event);
     }
-
+    /**
+     * Method removing operation from expresion, base on what button was pressed
+     * @param event Event parameters
+     */
     @FXML
     void removeExpresion(ActionEvent event) {
         String s5 = expresion.substring(Math.max(0, expresion.length() - 5));
@@ -122,7 +142,9 @@ public class Controller {
         }
         textOutput.setText(expresion.toString());
     }
-
+    /**
+     * Starting method
+     */
     @FXML
     void initialize() {
         assert textOutput != null : "fx:id=\"textOutput\" was not injected: check your FXML file 'calculator.fxml'.";
