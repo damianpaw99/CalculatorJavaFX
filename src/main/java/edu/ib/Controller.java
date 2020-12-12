@@ -80,8 +80,14 @@ public class Controller {
      */
     @FXML
     void calculate(ActionEvent event) {
-
-        String out = c.calculate(historyList);
+        String out="";
+        if(c.getExpresion().toString().contains("ans") && !historyList.getItems().isEmpty()) {
+            String s=historyList.getItems().get(0);
+            double value=Double.parseDouble(s.substring(s.indexOf("=")+1));
+             out = c.calculate(value);
+        } else {
+            out = c.calculate();
+        }
         textOutput.setText(c.getExpresion().toString() + "\n" + out);
         if (!out.contains("Syntax error")) {
             if (!Double.isNaN(Double.parseDouble(out)) && !Double.isInfinite(Double.parseDouble(out))) {
@@ -90,6 +96,7 @@ public class Controller {
                 historyList.setItems(list);
             }
         }
+
 
     }
 

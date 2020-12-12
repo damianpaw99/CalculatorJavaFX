@@ -6,20 +6,25 @@ import org.mariuszgromada.math.mxparser.Function;
 public class Calculator {
     private StringBuilder expresion = new StringBuilder();
 
-    public String calculate(ListView<String> historyList) {
+    public String calculate() {
         Function f = new Function("f(x)=" + expresion.toString());
 
         String outputValue = "";
 
-        //checking ans
-        if (!historyList.getItems().isEmpty()) {
-            if (historyList.getItems().get(0) != null) {
-                String value = "";
-                value = historyList.getItems().get(0).substring(historyList.getItems().get(0).indexOf('=') + 1);
-                String text = expresion.toString().replace("ans", value);
-                f = new Function("f(x)=" + text);
-            }
+        if (f.checkSyntax()) {
+            outputValue = String.valueOf(f.calculate());
+        } else {
+            outputValue = "Syntax error";
         }
+        return outputValue;
+    }
+    public String calculate(double ansValue) {
+        String outputValue = "";
+
+        //checking ans
+
+        String text = expresion.toString().replace("ans",String.valueOf(ansValue));
+        Function f = new Function("f(x)=" + text);
 
         if (f.checkSyntax()) {
             outputValue = String.valueOf(f.calculate());
